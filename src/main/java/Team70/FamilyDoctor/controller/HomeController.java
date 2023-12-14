@@ -1,2 +1,18 @@
-package Team70.FamilyDoctor.controller;public class HomeController {
+package Team70.FamilyDoctor.controller;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+
+@Controller
+@RequestMapping("/")
+public class HomeController {
+
+
+    @GetMapping("")
+    public String home(){
+
+        return "home";
+    }
+
+
 }
