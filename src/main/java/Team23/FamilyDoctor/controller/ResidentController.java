@@ -1,6 +1,6 @@
-package Team70.FamilyDoctor.controller;
+package Team23.FamilyDoctor.controller;
 
-import Team70.FamilyDoctor.entity.Resident;
+import Team23.FamilyDoctor.entity.Resident;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

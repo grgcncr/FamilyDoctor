@@ -1,4 +1,4 @@
-package Team70.FamilyDoctor;
+package Team23.FamilyDoctor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package Team70.FamilyDoctor.controller;
+package Team23.FamilyDoctor.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

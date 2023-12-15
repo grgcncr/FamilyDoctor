@@ -1,4 +1,4 @@
-package Team70.FamilyDoctor.entity;
+package Team23.FamilyDoctor.entity;
 
 import jakarta.persistence.Id;
 
