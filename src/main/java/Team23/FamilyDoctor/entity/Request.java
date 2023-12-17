@@ -8,17 +8,10 @@ import java.util.Date;
 public class Request {
 
 
-
     @Id
-    @GeneratedValue(strategy =  GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Integer Id;
-
-//    @Column
-//    private String citizenId;
-//
-//    @Column
-//    private String doctorId;
 
     @Column
     private String date;
@@ -35,29 +28,13 @@ public class Request {
     }
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name="citizen_id")
+    @JoinColumn(name = "citizen_id")
     private Citizen citizen;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name="doctor_id")
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-
-//    public String getCitizenId() {
-//        return citizenId;
-//    }
-//
-//    public void setCitizenId(String citizenId) {
-//        this.citizenId = citizenId;
-//    }
-//
-//    public String getDoctorId() {
-//        return doctorId;
-//    }
-//
-//    public void setDoctorId(String doctorId) {
-//        this.doctorId = doctorId;
-//    }
 
     public String getDate() {
         return date;
@@ -96,10 +73,6 @@ public class Request {
 
     @Override
     public String toString() {
-        return "Request{" +
-                "Id=" + Id +
-                ", date='" + date + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+        return "Request{" + "Id=" + Id + ", date='" + date + '\'' + ", status='" + status + '\'' + '}';
     }
 }

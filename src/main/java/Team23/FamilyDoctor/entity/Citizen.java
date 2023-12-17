@@ -1,4 +1,5 @@
 package Team23.FamilyDoctor.entity;
+
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -20,18 +21,18 @@ public class Citizen {
     public Citizen() {
     }
 
-    public Citizen( String firstName, String lastName, String phoneNumber, String socialSecurityNumber) {
+    public Citizen(String firstName, String lastName, String phoneNumber, String socialSecurityNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    @OneToMany(mappedBy="citizen", cascade = CascadeType.ALL)
-    @JoinColumn(name="request_id")
+    @OneToMany(mappedBy = "citizen", cascade = CascadeType.ALL)
+    @JoinColumn(name = "request_id")
     private List<Request> requests;
 
-    public List<Request> getRequests(){
+    public List<Request> getRequests() {
         return requests;
     }
 
@@ -74,15 +75,10 @@ public class Citizen {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
+
 
     @Override
     public String toString() {
-        return "Citizen{" +
-                "Id=" + Id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+        return "Citizen{" + "Id=" + Id + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", phoneNumber='" + phoneNumber + '\'' + '}';
     }
 }

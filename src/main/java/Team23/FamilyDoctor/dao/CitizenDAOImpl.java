@@ -28,7 +28,7 @@ public class CitizenDAOImpl implements CitizenDAO {
     @Override
     @Transactional
     public void saveCitizen(Citizen citizen) {
-        System.out.println("citizen "+ citizen.getId());
+        System.out.println("citizen " + citizen.getId());
         if (citizen.getId() == null) {
             entityManager.persist(citizen);
         } else {

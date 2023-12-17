@@ -28,11 +28,11 @@ public class Doctor {
     }
 
 
-    @OneToMany(mappedBy="doctor", cascade = CascadeType.ALL)
-    @JoinColumn(name="request_id")
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @JoinColumn(name = "request_id")
     private List<Request> requests;
 
-    public List<Request> getRequests(){
+    public List<Request> getRequests() {
         return requests;
     }
 
@@ -70,11 +70,6 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "Doctor{" +
-                "Id=" + Id +
-                ", fname='" + fname + '\'' +
-                ", lname='" + lname + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+        return "Doctor{" + "Id=" + Id + ", fname='" + fname + '\'' + ", lname='" + lname + '\'' + ", phoneNumber='" + phoneNumber + '\'' + '}';
     }
 }

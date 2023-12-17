@@ -28,7 +28,7 @@ public class DoctorDAOImpl implements DoctorDAO {
     @Override
     @Transactional
     public void saveDoctor(Doctor doctor) {
-        System.out.println("doctor "+ doctor.getId());
+        System.out.println("doctor " + doctor.getId());
         if (doctor.getId() == null) {
             entityManager.persist(doctor);
         } else {
