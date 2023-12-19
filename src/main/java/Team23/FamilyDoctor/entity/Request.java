@@ -52,9 +52,18 @@ public class Request {
         this.status = status;
     }
 
+    public void setId(Integer Id) {
+        this.Id = Id;
+    }
+
+    public Integer getId() {
+        return Id;
+    }
+
     public Citizen getCitizen() {
         return citizen;
     }
+
 
     public void setCitizen(Citizen citizen) {
 

@@ -1,0 +1,50 @@
+<citizens>
+    <div th:if="${ not#lists.isEmpty(citizens)}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>PhoneNumber</th>
+                <th>SSN</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="citizen : ${citizens}">
+                <td th:text="${citizen.firstName}"></td>
+                <td th:text="${citizen.lastName}"></td>
+                <td th:text="${citizen.phoneNumber}"></td>
+                <td th:text="${citizen.socialSecurityNumber}"></td>
+                <td th:if="${citizen.id}"><a class="btn btn-info" th:href="@{/citizen/{id}(id=${citizen.id})}">Edit</a>
+                    <button type="button" class="btn btn-danger" th:id="${citizen.id}"
+                            name="deleteCitizen"><i class="remove user icon"></i>
+                        Delete</button>
+                    <a class="btn btn-primary" th:href="@{/request/{id}(id=${citizen.id})}">Requests</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${ #lists.isEmpty(citizens)}">
+        No Citizens found!
+    </div>
+    <a href="/citizen/new" class="btn btn-primary" role="button">Create new Citizen</a>
+    <script type="text/javascript">
+        $("[name='deleteCitizen']").click(function() {
+            var urlCall = "/citizen/";
+            $.ajax({
+                url : urlCall + $(this).attr('id'),
+                type : 'DELETE',
+                success : function(result) {
+                    console.log(result);
+                    $(location).attr("href", value="/citizen");
+                },
+                error : function(result) {
+                    console.log(result);
+                },
+            });
+        });
+    </script>
+
+</citizens>

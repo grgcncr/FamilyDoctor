@@ -12,18 +12,18 @@ public class Doctor {
     private Integer Id;
 
     @Column
-    private String fname;
+    private String firstName;
     @Column
-    private String lname;
+    private String lastName;
     @Column
     private String phoneNumber;
 
     public Doctor() {
     }
 
-    public Doctor(String fname, String lname, String phoneNumber) {
-        this.fname = fname;
-        this.lname = lname;
+    public Doctor(String firstName, String lastName, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
     }
 
@@ -44,20 +44,20 @@ public class Doctor {
         return Id;
     }
 
-    public String getFname() {
-        return fname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLname() {
-        return lname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPhoneNumber() {
@@ -70,6 +70,6 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "Doctor{" + "Id=" + Id + ", fname='" + fname + '\'' + ", lname='" + lname + '\'' + ", phoneNumber='" + phoneNumber + '\'' + '}';
+        return "Doctor{" + "Id=" + Id + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", phoneNumber='" + phoneNumber + '\'' + '}';
     }
 }

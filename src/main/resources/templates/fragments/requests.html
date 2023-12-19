@@ -1,0 +1,95 @@
+<requests>
+<!--    citizen requests-->
+    <div th:if="${citizen}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request : ${requests}">
+                <td th:text="${request.status}"></td>
+                <td th:text="${request.date}"></td>
+                <td th:if="${request.id}"><a class="btn btn-info" th:href="@{/request/{citizen_id}/{request_id}(citizen_id=${citizen.id},request_id=${request.id})}">Edit</a>
+                    <button type="button" class="btn btn-danger" th:citizen_id="${citizen.id}" th:request_id="${request.id}"
+                            name="deleteRequest"><i class="remove user icon"></i>
+                        Delete</button>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a th:href="@{/request/{id}/new(id=${citizen.id})}" class="btn btn-primary" role="button">Create new Request</a>
+    <script type="text/javascript">
+        $("[name='deleteRequest']").click(function() {
+            var urlCall = "/request/";
+            var ur1= urlCall + $(this).attr('citizen_id') + "/" + $(this).attr('request_id')
+            console.log(ur1);
+            console.log($(this).attr('citizen_id'));
+            console.log($(this).attr('request_id'));
+            $.ajax({
+                url : urlCall + $(this).attr('citizen_id') + "/" + $(this).attr('request_id'),
+                type : 'DELETE',
+                success : function(result) {
+                    console.log(result);
+                    // $(location).attr("href", value="/request/"+$(this).attr('citizen_id'));
+                    window.location.reload();
+                },
+                error : function(result) {
+                    console.log(result);
+                },
+            });
+        });
+    </script>
+
+<!--    doctor requests-->
+    <div th:if="${doctor}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request : ${requests}">
+                <td th:text="${request.status}"></td>
+                <td th:text="${request.date}"></td>
+                <td th:if="${request.id}"><a class="btn btn-info" th:href="@{/request/{doctor_id}/{request_id}(doctor_id=${doctor.id},request_id=${request.id})}">Edit</a>
+                    <button type="button" class="btn btn-danger" th:doctor_id="${doctor.id}" th:request_id="${request.id}"
+                            name="deleteRequest"><i class="remove user icon"></i>
+                        Delete</button>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a th:href="@{/request/{id}/new(id=${doctor.id})}" class="btn btn-primary" role="button">Create new Request</a>
+    <script type="text/javascript">
+        $("[name='deleteRequest']").click(function() {
+            var urlCall = "/request/";
+            var ur1= urlCall + $(this).attr('doctor_id') + "/" + $(this).attr('request_id')
+            console.log(ur1);
+            console.log($(this).attr('doctor_id'));
+            console.log($(this).attr('request_id'));
+            $.ajax({
+                url : urlCall + $(this).attr('doctor_id') + "/" + $(this).attr('request_id'),
+                type : 'DELETE',
+                success : function(result) {
+                    console.log(result);
+                    // $(location).attr("href", value="/request/"+$(this).attr('doctor_id'));
+                    window.location.reload();
+                },
+                error : function(result) {
+                    console.log(result);
+                },
+            });
+        });
+    </script>
+</requests>
