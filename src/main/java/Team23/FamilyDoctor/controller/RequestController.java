@@ -29,7 +29,7 @@ public class RequestController {
     @PostMapping("/citizen/{citizen_id}")
     public String saveCitizenRequest(@PathVariable int citizen_id, @ModelAttribute("request") Request request) {
         System.out.println("citizen_id: (reg)" + citizen_id);
-        System.out.println("request: (reg)" + request.getDate());
+        System.out.println("request: (reg)" + request.getReqDate());
         requestService.saveCitizenRequest(request, citizen_id);
         return "redirect:/request/citizen/" + citizen_id;
     }
@@ -79,7 +79,7 @@ public class RequestController {
     @PostMapping("/doctor/{doctor_id}")
     public String saveDoctorRequest(@PathVariable int doctor_id, @ModelAttribute("request") Request request) {
         System.out.println("doctor_id: (reg)" + doctor_id);
-        System.out.println("request: (reg)" + request.getDate());
+        System.out.println("request: (reg)" + request.getReqDate());
         requestService.saveDoctorRequest(request, doctor_id);
         return "redirect:/request/doctor/" + doctor_id;
     }

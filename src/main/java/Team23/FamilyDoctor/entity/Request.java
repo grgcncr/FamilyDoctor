@@ -7,14 +7,13 @@ import java.util.Date;
 @Entity
 public class Request {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Integer Id;
 
     @Column
-    private String date;
+    private String reqDate;
 
     @Column
     private String status;
@@ -22,8 +21,8 @@ public class Request {
     public Request() {
     }
 
-    public Request(String date, String status, Citizen citizen, Doctor doctor) {
-        this.date = date;
+    public Request(String reqDate, String status, Citizen citizen, Doctor doctor) {
+        this.reqDate = reqDate;
         this.status = status;
     }
 
@@ -35,13 +34,12 @@ public class Request {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-
-    public String getDate() {
-        return date;
+    public String getReqDate() {
+        return reqDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setReqDate(String reqDate) {
+        this.reqDate = reqDate;
     }
 
     public String getStatus() {
@@ -82,6 +80,6 @@ public class Request {
 
     @Override
     public String toString() {
-        return "Request{" + "Id=" + Id + ", date='" + date + '\'' + ", status='" + status + '\'' + '}';
+        return "Request{" + "Id=" + Id + ", reqDate='" + reqDate + '\'' + ", status='" + status + '\'' + '}';
     }
 }

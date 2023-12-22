@@ -29,7 +29,7 @@ public class Doctor {
 
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
-    @JoinColumn(name = "request_id")
+//    @JoinColumn(name = "request_id")
     private List<Request> requests;
 
     public List<Request> getRequests() {

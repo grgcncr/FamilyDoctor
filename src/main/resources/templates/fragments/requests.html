@@ -12,7 +12,7 @@
             <tbody>
             <tr th:each="request : ${requests}">
                 <td th:text="${request.status}"></td>
-                <td th:text="${request.date}"></td>
+                <td th:text="${request.reqDate}"></td>
                 <td th:if="${request.id}"><a class="btn btn-info" th:href="@{/request/{citizen_id}/{request_id}(citizen_id=${citizen.id},request_id=${request.id})}">Edit</a>
                     <button type="button" class="btn btn-danger" th:citizen_id="${citizen.id}" th:request_id="${request.id}"
                             name="deleteRequest"><i class="remove user icon"></i>
@@ -59,7 +59,7 @@
             <tbody>
             <tr th:each="request : ${requests}">
                 <td th:text="${request.status}"></td>
-                <td th:text="${request.date}"></td>
+                <td th:text="${request.reqDate}"></td>
                 <td th:if="${request.id}"><a class="btn btn-info" th:href="@{/request/{doctor_id}/{request_id}(doctor_id=${doctor.id},request_id=${request.id})}">Edit</a>
                     <button type="button" class="btn btn-danger" th:doctor_id="${doctor.id}" th:request_id="${request.id}"
                             name="deleteRequest"><i class="remove user icon"></i>
