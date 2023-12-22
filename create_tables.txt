@@ -1,0 +1,23 @@
+create table citizen
+(
+    id           integer,
+    first_name   varchar(50),
+    last_name    varchar(50),
+    phone_number varchar(10),
+    ssn          varchar(12)
+);
+
+create table doctor
+(
+    id           integer,
+    first_name   varchar(50),
+    last_name    varchar(50),
+    phone_number varchar(10)
+);
+
+create table request
+(
+    id           integer,
+    request_date varchar(50),
+    status       varchar(50)
+);
