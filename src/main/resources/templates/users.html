@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="fragments/header :: header"></head>
 
@@ -9,6 +8,10 @@
 <div th:insert="fragments/menu :: menu"></div>
 <main>
     <!-- Content specific to this page -->
+    <!-- Include the citizens fragment -->
+    <div class="container" >
+        <div th:replace="fragments/users :: users"></div>
+    </div>
 </main>
 
 <!-- Include the footer fragment -->
