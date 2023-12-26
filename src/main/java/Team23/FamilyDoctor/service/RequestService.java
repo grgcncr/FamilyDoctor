@@ -3,12 +3,26 @@ package Team23.FamilyDoctor.service;
 import Team23.FamilyDoctor.entity.*;
 import Team23.FamilyDoctor.dao.*;
 import Team23.FamilyDoctor.repository.RequestRepository;
+import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+//import static Team23.FamilyDoctor.controller.CitizenController.getCitizens;
+//import static Team23.FamilyDoctor.controller.DoctorController.getDoctors;
+
 @Service
 public class RequestService {
+//    private List<Request> requests = new ArrayList<Request>();
+//    @PostConstruct
+//    public void setup() {
+//        Request x1= new Request("25/12/2023","ACCEPTED", getCitizens().get(1), getDoctors().get(1));
+//        requests.add(x1);
+//    }
+//
     @Autowired(required = false)
     private RequestRepository requestRepository;
     @Autowired(required = false)

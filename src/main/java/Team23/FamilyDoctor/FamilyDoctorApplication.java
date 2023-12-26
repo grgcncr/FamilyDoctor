@@ -2,9 +2,9 @@ package Team23.FamilyDoctor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import java.io.BufferedReader;
+import org.springframework.context.annotation.ComponentScan;
 
+import java.io.BufferedReader;
 @SpringBootApplication
 public class FamilyDoctorApplication {
 

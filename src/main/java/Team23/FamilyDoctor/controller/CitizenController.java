@@ -15,6 +15,23 @@ import java.util.List;
 @RequestMapping("citizen")
 public class CitizenController {
 
+//    private static List<Citizen> citizens = new ArrayList<Citizen>();
+//
+//    @PostConstruct
+//    public void setup() {
+//        Citizen x1= new Citizen( "Nick", "Jones", "6912345678","10100100123");
+//        Citizen x2= new Citizen( "Jack", "James", "6912121212", "10100100124");
+//        Citizen x3= new Citizen("John", "Stone", "6923232323","10100100125");
+//        citizens.add(x1);
+//        citizens.add(x2);
+//        citizens.add(x3);
+//        saveCitizen(x1,Model);
+//    }
+//public static List<Citizen> getCitizens() {
+//    return citizens;
+//}
+    
+    
     @Autowired(required = false)
     private CitizenDAO citizenDao;
 

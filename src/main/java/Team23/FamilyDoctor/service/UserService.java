@@ -34,8 +34,8 @@ public class UserService implements UserDetailsService {
     @Transactional
     public Integer saveUser(User user) {
         String passwd= user.getPassword();
-        String encodedPasswod = passwordEncoder.encode(passwd);
-        user.setPassword(encodedPasswod);
+        String encodedPassword = passwordEncoder.encode(passwd);
+        user.setPassword(encodedPassword);
 
         Role role = roleRepository.findByName("ROLE_USER")
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public Integer updateUer(User user) {
+    public Integer updateUser(User user) {
         user = userRepository.save(user);
         return user.getId();
     }

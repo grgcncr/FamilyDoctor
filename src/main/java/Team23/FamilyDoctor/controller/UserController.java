@@ -5,6 +5,7 @@ import Team23.FamilyDoctor.entity.User;
 import Team23.FamilyDoctor.repository.RoleRepository;
 import Team23.FamilyDoctor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +29,13 @@ public class UserController {
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute User user, Model model){
         System.out.println("Roles: "+user.getRoles());
-        Integer id = userService.saveUser(user);
-        String message = "User '"+id+"' saved successfully !";
-        model.addAttribute("msg", message);
+        try {
+            Integer id = userService.saveUser(user);
+            String message = "User '"+id+"' saved successfully !";
+            model.addAttribute("msg", message);
+        }catch (DuplicateKeyException dke) {
+            String message = "User couldn't be saved successfully !";
+                 }
         return "home";
     }
 
@@ -63,7 +68,7 @@ public class UserController {
         Role role = roleRepository.findById(role_id).get();
         user.getRoles().remove(role);
         System.out.println("Roles: "+user.getRoles());
-        userService.updateUer(user);
+        userService.updateUser(user);
         model.addAttribute("users", userService.getUsers());
         model.addAttribute("roles", roleRepository.findAll());
         return "users";
@@ -76,7 +81,7 @@ public class UserController {
         Role role = roleRepository.findById(role_id).get();
         user.getRoles().add(role);
         System.out.println("Roles: "+user.getRoles());
-        userService.updateUer(user);
+        userService.updateUser(user);
         model.addAttribute("users", userService.getUsers());
         model.addAttribute("roles", roleRepository.findAll());
         return "users";

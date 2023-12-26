@@ -14,7 +14,20 @@ import java.util.List;
 @Controller
 @RequestMapping("doctor")
 public class DoctorController {
-
+//    private static List<Doctor> doctors = new ArrayList<Doctor>();
+//    @PostConstruct
+//    public void setup() {
+//        Doctor x1= new Doctor( "Jakdsyen", "Tist", "6912345670");
+//        Doctor x2= new Doctor( "James", "Bulk", "6912121210");
+//        Doctor x3= new Doctor("El Pedo", "Bailando", "6923232320");
+//        doctors.add(x1);
+//        doctors.add(x2);
+//        doctors.add(x3);
+//    }
+//    public static List<Doctor> getDoctors() {
+//        return doctors;
+//    }
+    
     @Autowired(required = false)
     private DoctorDAO doctorDao;
 

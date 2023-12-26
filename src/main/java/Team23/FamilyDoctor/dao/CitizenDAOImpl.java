@@ -8,10 +8,10 @@ import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
-
 public class CitizenDAOImpl implements CitizenDAO {
 
     private EntityManager entityManager;
+    
 
     @Override
     @Transactional
@@ -19,6 +19,7 @@ public class CitizenDAOImpl implements CitizenDAO {
         TypedQuery query = entityManager.createQuery("from Citizen", Citizen.class);
         return query.getResultList();
     }
+
 
     @Override
     public Citizen getCitizen(Integer citizen_id) {
