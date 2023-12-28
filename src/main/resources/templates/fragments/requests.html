@@ -13,7 +13,7 @@
             <tr th:each="request : ${requests}">
                 <td th:text="${request.status}"></td>
                 <td th:text="${request.reqDate}"></td>
-                <td th:if="${request.id}"><a class="btn btn-info" th:href="@{/request/{citizen_id}/{request_id}(citizen_id=${citizen.id},request_id=${request.id})}">Edit</a>
+                <td th:if="${request.id}"><a class="btn btn-info" th:href="@{/citizen/request/{citizen_id}/{request_id}(citizen_id=${citizen.id},request_id=${request.id})}">Edit</a>
                     <button type="button" class="btn btn-danger" th:citizen_id="${citizen.id}" th:request_id="${request.id}"
                             name="deleteRequest"><i class="remove user icon"></i>
                         Delete</button>
@@ -23,7 +23,7 @@
             </tbody>
         </table>
     </div>
-    <a th:href="@{/request/{id}/new(id=${citizen.id})}" class="btn btn-primary" role="button">Create new Request</a>
+    <a th:href="@{/citizen/request/{id}/new(id=${citizen.id})}" class="btn btn-primary" role="button">Create new Request</a>
     <script type="text/javascript">
         $("[name='deleteRequest']").click(function() {
             var urlCall = "/request/";

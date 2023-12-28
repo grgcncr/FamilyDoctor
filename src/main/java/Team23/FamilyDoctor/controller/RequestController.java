@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/request")
+@RequestMapping("/citizen/request")
 public class RequestController {
 
 
@@ -20,23 +20,22 @@ public class RequestController {
     @Autowired
     RequestService requestService;
 
-    @Autowired(required = false)
+    @Autowired
     CitizenDAO citizenDAO;
 
-    @Autowired(required = false)
+    @Autowired
     DoctorDAO doctorDAO;
 
-    // Citizen Requests
 
-    @PostMapping("/citizen/{citizen_id}")
+    @PostMapping("/citizen/request/{citizen_id}")
     public String saveCitizenRequest(@PathVariable int citizen_id, @ModelAttribute("request") Request request) {
         System.out.println("citizen_id: (reg)" + citizen_id);
         System.out.println("request: (reg)" + request.getReqDate());
         requestService.saveCitizenRequest(request, citizen_id);
-        return "redirect:/request/citizen/" + citizen_id;
+        return "redirect:/citizen/request/" + citizen_id;
     }
 
-    @GetMapping("/citizen/{citizen_id}")
+    @GetMapping("/citizen/request/{citizen_id}")
     public String showCitizenRequests(@PathVariable int citizen_id, Model model) {
         Citizen citizen = citizenDAO.getCitizen(citizen_id);
         List<Request> requests = citizen.getRequests();
@@ -46,7 +45,7 @@ public class RequestController {
         return "requests";
     }
 
-    @GetMapping("/citizen/{citizen_id}/{request_id}")
+    @GetMapping("/citizen/request/{citizen_id}/{request_id}")
     public String editCitizenRequest(@PathVariable int citizen_id, @PathVariable int request_id, Model model) {
         Request request = requestService.getRequest(request_id);
         model.addAttribute("request", request);
@@ -54,7 +53,7 @@ public class RequestController {
         return "add_request";
     }
 
-    @PostMapping("/citizen/{citizen_id}/{request_id}")
+    @PostMapping("/citizen/request/{citizen_id}/{request_id}")
     public String updateCitizenRequest(@PathVariable int citizen_id, @PathVariable int request_id) {
         System.out.println("citizen_id: (2 ids)" + citizen_id);
         Request request = requestService.getRequest(request_id);
@@ -62,7 +61,7 @@ public class RequestController {
         return "redirect:/request/citizen/" + citizen_id;
     }
 
-    @GetMapping("/citizen/{citizen_id}/new")
+    @GetMapping("/citizen/request/{citizen_id}/new")
     public String addCitizenRequest(@PathVariable int citizen_id, Model model) {
         Request request = new Request();
         model.addAttribute("request", request);
@@ -70,7 +69,7 @@ public class RequestController {
         return "add_request";
     }
 
-    @DeleteMapping("/citizen/{citizen_id}/{request_id}")
+    @DeleteMapping("/citizen/request/{citizen_id}/{request_id}")
     public String deleteCitizenRequest(@PathVariable int citizen_id, @PathVariable int request_id, Model model) {
         requestService.deleteRequest(request_id);
         return "redirect:/home";

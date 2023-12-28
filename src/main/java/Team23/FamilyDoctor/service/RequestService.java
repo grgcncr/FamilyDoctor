@@ -23,11 +23,11 @@ public class RequestService {
 //        requests.add(x1);
 //    }
 //
-    @Autowired(required = false)
+    @Autowired
     private RequestRepository requestRepository;
-    @Autowired(required = false)
+    @Autowired
     private CitizenDAO citizenDAO;
-    @Autowired(required = false)
+    @Autowired
     private DoctorDAO doctorDAO;
 
     @Transactional

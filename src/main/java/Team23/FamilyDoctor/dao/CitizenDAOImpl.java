@@ -6,10 +6,13 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+@Repository
 public class CitizenDAOImpl implements CitizenDAO {
-
+    @Autowired
     private EntityManager entityManager;
     
 

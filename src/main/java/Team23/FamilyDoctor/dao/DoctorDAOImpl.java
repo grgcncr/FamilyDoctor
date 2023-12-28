@@ -6,12 +6,15 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class DoctorDAOImpl implements DoctorDAO {
-
+    @Autowired
     private EntityManager entityManager;
+
 
     @Override
     @Transactional
@@ -19,6 +22,7 @@ public class DoctorDAOImpl implements DoctorDAO {
         TypedQuery query = entityManager.createQuery("from Doctor", Doctor.class);
         return query.getResultList();
     }
+
 
     @Override
     public Doctor getDoctor(Integer doctor_id) {

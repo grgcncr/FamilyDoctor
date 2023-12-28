@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:insert="fragments/header :: header"></head>
+<head th:insert="~{fragments/header :: header}"></head>
 
 <body>
 <!-- Include the header fragment -->
-<div th:insert="fragments/menu :: menu"></div>
+<div th:insert="~{fragments/menu :: menu}"></div>
 <main>
     <div class="container" >
-        <form action="#" th:action="@{/request/{id}(id=${citizen_id})}" th:method="post" th:object="${request}"
+        <form action="#" th:action="@{/citizen/request/{id}(id=${citizen_id})/new}" th:method="post" th:object="${request}"
               method="post">
 
             <div class="form-group">
@@ -31,6 +31,6 @@
 </main>
 
 <!-- Include the footer fragment -->
-<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

@@ -27,8 +27,7 @@ public class DoctorController {
 //    public static List<Doctor> getDoctors() {
 //        return doctors;
 //    }
-    
-    @Autowired(required = false)
+    @Autowired
     private DoctorDAO doctorDao;
 
     @GetMapping("")

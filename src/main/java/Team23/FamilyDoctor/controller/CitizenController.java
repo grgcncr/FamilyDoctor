@@ -30,10 +30,18 @@ public class CitizenController {
 //public static List<Citizen> getCitizens() {
 //    return citizens;
 //}
-    
-    
-    @Autowired(required = false)
+
+    @PostConstruct
+    public void setup() {
+        Doctor doctor = doctorDao.getDoctor(1);
+        Citizen citizen = citizenDao.getCitizen(1);
+        Request request = new Request("12/12/2023","ACCEPTED",citizen,doctor);
+    }
+
+    @Autowired
     private CitizenDAO citizenDao;
+    @Autowired
+    private DoctorDAO doctorDao;
 
     @GetMapping("")
     public String showCitizens(Model model) {
@@ -70,6 +78,7 @@ public class CitizenController {
         citizenDao.deleteCitizen(citizen_id);
         return "citizens";
     }
+
 
 
 }
