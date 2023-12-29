@@ -7,6 +7,7 @@ import java.util.List;
 public class Citizen {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private Integer Id;
     @Column
     private String firstName;

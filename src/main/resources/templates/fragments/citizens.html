@@ -16,7 +16,8 @@
                 <td th:text="${citizen.lastName}"></td>
                 <td th:text="${citizen.phoneNumber}"></td>
                 <td th:text="${citizen.socialSecurityNumber}"></td>
-                <td th:if="${citizen.id}"><a class="btn btn-info" th:href="@{/citizen/{id}(id=${citizen.id})}">Edit</a>
+                <td th:if="${citizen.id}">
+                    <a class="btn btn-info" th:href="@{/citizen/{id}(id=${citizen.id})}">Edit</a>
                     <button type="button" class="btn btn-danger" th:id="${citizen.id}"
                             name="deleteCitizen"><i class="remove user icon"></i>
                         Delete</button>

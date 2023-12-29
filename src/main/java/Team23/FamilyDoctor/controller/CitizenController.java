@@ -31,12 +31,12 @@ public class CitizenController {
 //    return citizens;
 //}
 
-    @PostConstruct
-    public void setup() {
-        Doctor doctor = doctorDao.getDoctor(1);
-        Citizen citizen = citizenDao.getCitizen(1);
-        Request request = new Request("12/12/2023","ACCEPTED",citizen,doctor);
-    }
+//    @PostConstruct
+//    public void setup() {
+//        Doctor doctor = doctorDao.getDoctor(1);
+//        Citizen citizen = citizenDao.getCitizen(1);
+//        Request request = new Request("12/12/2023","ACCEPTED",citizen,doctor);
+//    }
 
     @Autowired
     private CitizenDAO citizenDao;
@@ -53,9 +53,7 @@ public class CitizenController {
     public String addCitizen(Model model) {
         Citizen citizen = new Citizen();
         model.addAttribute("citizen", citizen);
-
         return "add_citizen";
-
     }
 
     @GetMapping("{citizen_id}")
@@ -63,7 +61,6 @@ public class CitizenController {
         Citizen citizen = citizenDao.getCitizen(citizen_id);
         model.addAttribute("citizen", citizen);
         return "add_citizen";
-
     }
 
     @PostMapping("/new")
