@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/citizen/request")
+@RequestMapping("citizen")
 public class RequestController {
 
 
@@ -27,15 +27,15 @@ public class RequestController {
     DoctorDAO doctorDAO;
 
 
-    @PostMapping("/citizen/request/{citizen_id}")
+    @PostMapping("{citizen_id}/requests/new")
     public String saveCitizenRequest(@PathVariable int citizen_id, @ModelAttribute("request") Request request) {
         System.out.println("citizen_id: (reg)" + citizen_id);
         System.out.println("request: (reg)" + request.getReqDate());
         requestService.saveCitizenRequest(request, citizen_id);
-        return "redirect:/citizen/request/" + citizen_id;
+        return "redirect:/citizen" + citizen_id;
     }
 
-    @GetMapping("/citizen/request/{citizen_id}")
+    @GetMapping("{citizen_id}/requests")
     public String showCitizenRequests(@PathVariable int citizen_id, Model model) {
         Citizen citizen = citizenDAO.getCitizen(citizen_id);
         List<Request> requests = citizen.getRequests();
@@ -45,7 +45,7 @@ public class RequestController {
         return "requests";
     }
 
-    @GetMapping("/citizen/request/{citizen_id}/{request_id}")
+    @GetMapping("/citizen/{citizen_id}/requests/{request_id}")
     public String editCitizenRequest(@PathVariable int citizen_id, @PathVariable int request_id, Model model) {
         Request request = requestService.getRequest(request_id);
         model.addAttribute("request", request);
@@ -53,12 +53,12 @@ public class RequestController {
         return "add_request";
     }
 
-    @PostMapping("/citizen/request/{citizen_id}/{request_id}")
+    @PostMapping("/citizen/{citizen_id}/requests/{request_id}")
     public String updateCitizenRequest(@PathVariable int citizen_id, @PathVariable int request_id) {
         System.out.println("citizen_id: (2 ids)" + citizen_id);
         Request request = requestService.getRequest(request_id);
         requestService.saveCitizenRequest(request, citizen_id);
-        return "redirect:/request/citizen/" + citizen_id;
+        return "redirect:/citizen" + citizen_id;
     }
 
     @GetMapping("/citizen/request/{citizen_id}/new")

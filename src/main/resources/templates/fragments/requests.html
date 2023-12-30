@@ -1,5 +1,8 @@
 <requests>
 <!--    citizen requests-->
+    <div th:if="${ #lists.isEmpty(requests)}">
+        <h1>No Requests found!</h1>
+    </div>
     <div th:if="${citizen}">
         <table class="table">
             <thead>
