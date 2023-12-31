@@ -24,9 +24,10 @@
                     <button type="button" class="btn btn-danger" th:id="${citizen.id}"
                             name="deleteCitizen"><i class="remove user icon"></i>
                         Delete</button>
-                    <div th:if="${ not#lists.isEmpty(requests)}">
-                    <a class="btn btn-primary" th:href="@{/citizen/request/{id}(id=${citizen.id})}">Requests</a>
-                    </div>
+<!--                    <div th:if="${ not#lists.isEmpty(requests)}">-->
+                    <a class="btn btn-info" th:href="@{/citizen/{id}/request (id=${citizen.id})}">Requests</a>
+<!--                    </div>-->
+                    <a th:href="@{/citizen/{citizen_id}/request/new(citizen_id=${citizen.id})}" class="btn btn-primary" role="button">Create new request</a>
                 </td>
             </tr>
             </tbody>
@@ -35,7 +36,7 @@
     <div th:if="${ #lists.isEmpty(citizens)}">
         No Citizens found!
     </div>
-    <a href="/citizen/new" class="btn btn-primary" role="button">Create new Citizen</a>
+    <a href="/citizen/new" class="btn btn-primary" role="button">Create new citizen</a>
     <script type="text/javascript">
         $("[name='deleteCitizen']").click(function() {
             var button = $(this); // Store reference to 'this'

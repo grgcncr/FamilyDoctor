@@ -8,7 +8,8 @@
 <div th:insert="~{fragments/menu :: menu}"></div>
 <main>
     <div class="container" >
-        <form action="#" th:action="@{/citizen/request/{id}(id=${citizen_id})/new}" th:method="post" th:object="${request}"
+<!--        only for citizen to test-->
+        <form action="#" th:action="@{/citizen/{id}/request/new(id=${citizen_id})}" th:method="post" th:object="${request}"
               method="post">
 
             <div class="form-group">

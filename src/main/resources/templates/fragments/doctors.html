@@ -18,7 +18,7 @@
                     <button type="button" class="btn btn-danger" th:id="${doctor.id}"
                             name="deleteDoctor"><i class="remove user icon"></i>
                         Delete</button>
-                    <a class="btn btn-primary" th:href="@{/request/{id}(id=${doctor.id})}">Requests</a>
+                    <a class="btn btn-primary" th:href="@{/doctor/{id}/request (id=${doctor.id})}">Requests</a>
                 </td>
             </tr>
             </tbody>

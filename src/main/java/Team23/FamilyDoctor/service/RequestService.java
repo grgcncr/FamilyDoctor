@@ -34,6 +34,7 @@ public class RequestService {
     public void saveCitizenRequest(Request request, Integer citizen_id) {
         Citizen citizen = citizenDAO.getCitizen(citizen_id);
         request.setCitizen(citizen);
+        citizen.getRequests().add(request);
         requestRepository.save(request);
     }
 
@@ -44,6 +45,18 @@ public class RequestService {
         requestRepository.save(request);
     }
 
+
+    @Transactional
+    public List<Request> getCitizenRequests(Integer citizen_id){
+        Citizen citizen = citizenDAO.getCitizen(citizen_id);
+        return citizen.getRequests();
+    }
+
+    @Transactional
+    public List<Request> getDoctorRequests(Integer doctor_id){
+        Doctor doctor = doctorDAO.getDoctor(doctor_id);
+        return doctor.getRequests();
+    }
     @Transactional
     public Request getRequest(int requestId) {
         return requestRepository.findById(requestId).get();

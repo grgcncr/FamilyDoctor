@@ -1,6 +1,8 @@
 package Team23.FamilyDoctor.entity;
 
+import Team23.FamilyDoctor.service.RequestService;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 @Entity
@@ -29,9 +31,9 @@ public class Citizen {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    @OneToMany(mappedBy = "citizen", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "citizen", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //  @JoinColumn(name = "request_id")
-    private List<Request> requests;
+    private List<Request> requests ;
 
     public List<Request> getRequests() {
         return requests;
