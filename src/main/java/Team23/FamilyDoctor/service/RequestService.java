@@ -62,6 +62,7 @@ public class RequestService {
         return requestRepository.findById(requestId).get();
     }
 
+    @Transactional
     public void deleteRequest(int requestId) {
         requestRepository.deleteById(requestId);
     }

@@ -28,7 +28,7 @@ public class Doctor {
     }
 
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "request_id")
     private List<Request> requests;
 

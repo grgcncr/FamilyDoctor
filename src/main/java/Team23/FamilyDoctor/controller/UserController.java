@@ -6,6 +6,7 @@ import Team23.FamilyDoctor.repository.RoleRepository;
 import Team23.FamilyDoctor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -61,7 +62,7 @@ public class UserController {
         model.addAttribute("users", userService.getUsers());
         return "users";
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/user/role/delete/{user_id}/{role_id}")
     public String deleteRolefromUser(@PathVariable Long user_id, @PathVariable Integer role_id, Model model){
         User user = (User) userService.getUser(user_id);
@@ -74,7 +75,7 @@ public class UserController {
         return "users";
 
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/user/role/add/{user_id}/{role_id}")
     public String addRoletoUser(@PathVariable Long user_id, @PathVariable Integer role_id, Model model){
         User user = (User) userService.getUser(user_id);

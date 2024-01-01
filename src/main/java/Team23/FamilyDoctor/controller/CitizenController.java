@@ -71,11 +71,10 @@ public class CitizenController {
         model.addAttribute("citizens", citizenDao.getCitizens());
         return "citizens";
     }
-
-    @DeleteMapping("{citizen_id}")
+    @GetMapping("{citizen_id}/delete")
     public String deleteCitizen(@PathVariable Integer citizen_id) {
         citizenDao.deleteCitizen(citizen_id);
-        return "citizens";
+        return "redirect:/citizen";
     }
 
 
@@ -126,11 +125,13 @@ public class CitizenController {
         return "add_request";
     }
 
-    @DeleteMapping("{citizen_id}/request/{request_id}")
+    //deletes mapping
+    @GetMapping("{citizen_id}/request/{request_id}/delete")
     public String deleteCitizenRequest(@PathVariable int citizen_id, @PathVariable int request_id, Model model) {
         requestService.deleteRequest(request_id);
-        return "redirect:/home";
+        return "redirect:/citizen/{citizen_id}/request";
     }
+
 
 
 }
