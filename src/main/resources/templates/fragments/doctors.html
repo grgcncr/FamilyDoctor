@@ -6,6 +6,7 @@
                 <th>Name</th>
                 <th>Surname</th>
                 <th>PhoneNumber</th>
+                <th>ID</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -14,6 +15,7 @@
                 <td th:text="${doctor.firstName}"></td>
                 <td th:text="${doctor.lastName}"></td>
                 <td th:text="${doctor.phoneNumber}"></td>
+                <td th:text="${doctor.id}"></td>
                 <td th:if="${doctor.id}">
                     <a class="btn btn-info" th:href="@{/doctor/{id}(id=${doctor.id})}">Edit</a>
                     <a class="btn btn-danger" th:href="@{/doctor/{id}/delete(id=${doctor.id})}">Delete</a>

@@ -109,6 +109,21 @@ public class DoctorController {
         return "redirect:/doctor/{doctor_id}/request";
     }
 
+    //accepts request
+    @GetMapping("{doctor_id}/request/{request_id}/accept")
+    public String acceptRequest(@PathVariable int doctor_id, @PathVariable int request_id, Model model) {
+        requestService.acceptRequest(request_id);
+//        requestService.getRequest(request_id).setStatus("ACCEPTED");
+        return "redirect:/doctor/{doctor_id}/request";
+    }
+
+    //declines request
+    @GetMapping("{doctor_id}/request/{request_id}/decline")
+    public String declineRequest(@PathVariable int doctor_id, @PathVariable int request_id, Model model) {
+        requestService.declineRequest(request_id);
+//        requestService.getRequest(request_id).setStatus("DECLINED");
+        return "redirect:/doctor/{doctor_id}/request";
+    }
 
 
 }

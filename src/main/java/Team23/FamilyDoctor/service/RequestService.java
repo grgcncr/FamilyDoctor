@@ -57,6 +57,19 @@ public class RequestService {
         Doctor doctor = doctorDAO.getDoctor(doctor_id);
         return doctor.getRequests();
     }
+
+    @Transactional
+    public void acceptRequest(Integer request_id) {
+        requestRepository.findById(request_id).get().setStatus("ACCEPTED");
+        requestRepository.save(requestRepository.findById(request_id).get());
+    }
+
+    @Transactional
+    public void declineRequest(Integer request_id) {
+        requestRepository.findById(request_id).get().setStatus("DECLINED");
+        requestRepository.save(requestRepository.findById(request_id).get());
+    }
+
     @Transactional
     public Request getRequest(int requestId) {
         return requestRepository.findById(requestId).get();
