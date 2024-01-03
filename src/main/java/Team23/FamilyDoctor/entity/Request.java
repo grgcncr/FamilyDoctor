@@ -2,7 +2,7 @@ package Team23.FamilyDoctor.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Request {
@@ -19,11 +19,18 @@ public class Request {
     private String status;
 
     public Request() {
+        this.reqDate = LocalDate.now().toString();
+        this.status =  "PENDING";
     }
 
-    public Request(String reqDate, String status, Citizen citizen, Doctor doctor) {
-        this.reqDate = reqDate;
-        this.status = status;
+//    public Request(String reqDate, String status, Citizen citizen, Doctor doctor) {
+//        this.reqDate = reqDate;
+//        this.status = status;
+//    }
+
+    public Request(Citizen citizen, Doctor doctor) {
+        this.reqDate = LocalDate.now().toString();
+        this.status =  "PENDING";
     }
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},fetch = FetchType.LAZY)

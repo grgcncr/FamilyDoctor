@@ -42,6 +42,18 @@ public class RequestService {
     public void saveDoctorRequest(Request request, Integer doctor_id) {
         Doctor doctor = doctorDAO.getDoctor(doctor_id);
         request.setDoctor(doctor);
+        doctor.getRequests().add(request);
+        requestRepository.save(request);
+    }
+
+    @Transactional
+    public void saveRequest(Request request,Integer citizen_id, Integer doctor_id) {
+        Citizen citizen = citizenDAO.getCitizen(citizen_id);
+        request.setCitizen(citizen);
+        citizen.getRequests().add(request);
+        Doctor doctor = doctorDAO.getDoctor(doctor_id);
+        request.setDoctor(doctor);
+        doctor.getRequests().add(request);
         requestRepository.save(request);
     }
 

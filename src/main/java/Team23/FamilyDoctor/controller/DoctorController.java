@@ -45,11 +45,18 @@ public class DoctorController {
     @PostMapping("/new")
     public String saveDoctor(@ModelAttribute("doctor") Doctor doctor, Model model) {
         doctorDao.saveDoctor(doctor);
+        for(Request request : doctor.getRequests()){
+            requestService.saveCitizenRequest(request,doctor.getId());
+        }
         model.addAttribute("doctors", doctorDao.getDoctors());
         return "doctors";
     }
     @GetMapping("{doctor_id}/delete")
     public String deleteDoctor(@PathVariable Integer doctor_id) {
+        Doctor doctor = doctorDao.getDoctor(doctor_id);
+        for(Request request : doctor.getRequests()){
+            requestService.deleteRequest(request.getId());
+        }
         doctorDao.deleteDoctor(doctor_id);
         return "redirect:/doctor";
     }

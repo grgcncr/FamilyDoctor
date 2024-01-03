@@ -44,26 +44,24 @@ public class CitizenController {
     @PostMapping("/new")
     public String saveCitizen(@ModelAttribute("citizen") Citizen citizen, Model model) {
         citizenDao.saveCitizen(citizen);
+        for(Request request : citizen.getRequests()){
+            requestService.saveCitizenRequest(request,citizen.getId());
+        }
         model.addAttribute("citizens", citizenDao.getCitizens());
         return "citizens";
     }
     @GetMapping("{citizen_id}/delete")
     public String deleteCitizen(@PathVariable Integer citizen_id) {
+        Citizen citizen = citizenDao.getCitizen(citizen_id);
+        for(Request request : citizen.getRequests()) {
+            requestService.deleteRequest(request.getId());
+        }
         citizenDao.deleteCitizen(citizen_id);
         return "redirect:/citizen";
     }
 
 
 // Handle Citizen request
-
-    @PostMapping("{citizen_id}/request/new")
-    public String saveCitizenRequest(@PathVariable int citizen_id, @ModelAttribute("request") Request request) {
-        System.out.println("citizen_id: (reg)" + citizen_id);
-        System.out.println("request: (reg)" + request.getReqDate());
-        request.setStatus("PENDING");
-        requestService.saveCitizenRequest(request, citizen_id);
-        return "redirect:/citizen";
-    }
 
     @GetMapping("{citizen_id}/request")
     public String showCitizenRequests(@PathVariable int citizen_id, Model model) {
@@ -77,20 +75,19 @@ public class CitizenController {
         return "requests";
     }
 
-    @GetMapping("{citizen_id}/request/{request_id}")
-    public String editCitizenRequest(@PathVariable int citizen_id, @PathVariable int request_id, Model model) {
-        Request request = requestService.getRequest(request_id);
-        model.addAttribute("request", request);
-        model.addAttribute("citizen_id", citizen_id);
-        return "add_request";
-    }
+//
+//    @GetMapping("{citizen_id}/request/{request_id}")
+//    public String editCitizenRequest(@PathVariable int citizen_id, @PathVariable int request_id, Model model) {
+//        Request request = requestService.getRequest(request_id);
+//        model.addAttribute("request", request);
+//        model.addAttribute("citizen_id", citizen_id);
+//        return "add_request";
+//    }
 
     @PostMapping("{citizen_id}/request/{request_id}")
     public String updateCitizenRequest(@PathVariable int citizen_id, @PathVariable int request_id) {
         System.out.println("citizen_id: (2 ids)" + citizen_id);
         Request request = requestService.getRequest(request_id);
-//        requestService.deleteRequest(request_id);
-//        requestService.saveCitizenRequest(request, citizen_id);
         return "redirect:/citizen" ;
     }
 
@@ -101,9 +98,17 @@ public class CitizenController {
         model.addAttribute("citizen_id", citizen_id);
         return "add_request";
     }
+    @PostMapping("{citizen_id}/request/new")
+    public String saveCitizenRequest(@PathVariable int citizen_id, @ModelAttribute("request") Request request) {
+        System.out.println("citizen_id: (reg)" + citizen_id);
+        System.out.println("request: (reg)" + request.getReqDate());
+//        request.setStatus("PENDING");
+        requestService.saveRequest(request, citizen_id, request.getDoctor().getId());
+        return "redirect:/citizen";
+    }
 
-    //deletes mapping
-    @GetMapping("{citizen_id}/request/{request_id}/delete")
+
+    @GetMapping("{citizen_id}/request/{request_id}/delete") //Deletes Mapping
     public String deleteCitizenRequest(@PathVariable int citizen_id, @PathVariable int request_id, Model model) {
         requestService.deleteRequest(request_id);
         return "redirect:/citizen/{citizen_id}/request";
