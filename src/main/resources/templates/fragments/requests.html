@@ -1,5 +1,6 @@
-<requests>
-    <!--    citizen request-->
+<requests xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+    <!--    citizen requests-->
 
     <div th:if="${citizen}">
         <div th:if="${ #lists.isEmpty(citizen.requests)}">
@@ -18,12 +19,15 @@
                 </thead>
                 <tbody>
                 <tr th:each="request : ${request}">
-                    <td th:text="${request.status}" th:style="${request.status == 'ACCEPTED' ? 'color: green; font-weight: bold;' : (request.status == 'PENDING' ? '' : 'color: red; font-weight: bold;')}"></td>
+                    <td th:text="${request.status}"
+                        th:style="${request.status == 'ACCEPTED' ? 'color: green; font-weight: bold;' : (request.status == 'PENDING' ? '' : 'color: red; font-weight: bold;')}"></td>
                     <td th:text="${request.reqDate}"></td>
                     <td th:text="${request.doctor.id}"></td>
                     <td th:if="${request.id}">
-<!--                        <a class="btn btn-info"-->
-<!--                           th:href="@{/citizen/{citizen_id}/request/{request_id}(citizen_id=${citizen.id},request_id=${request.id})}">Edit</a>-->
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a class="btn btn-info"
+                               th:href="@{/citizen/{citizen_id}/request/{request_id}(citizen_id=${citizen.id},request_id=${request.id})}">Edit</a>
+                        </div>
                         <a class="btn btn-danger"
                            th:href="@{/citizen/{citizen_id}/request/{request_id}/delete(citizen_id=${citizen.id},request_id=${request.id})}">Delete</a>
                     </td>
@@ -53,22 +57,24 @@
                 </thead>
                 <tbody>
                 <tr th:each="request : ${request}">
-                    <td th:text="${request.status}" th:style="${request.status == 'ACCEPTED' ? 'color: green; font-weight: bold;' : (request.status == 'PENDING' ? '' : 'color: red; font-weight: bold;')}"></td>
+                    <td th:text="${request.status}"
+                        th:style="${request.status == 'ACCEPTED' ? 'color: green; font-weight: bold;' : (request.status == 'PENDING' ? '' : 'color: red; font-weight: bold;')}"></td>
                     <td th:text="${request.reqDate}"></td>
                     <td th:text="${request.citizen.id}"></td>
                     <td th:if="${request.id}">
-<!--                        <a class="btn btn-info"-->
-<!--                           th:href="@{/doctor/{doctor_id}/request/{request_id}(doctor_id=${doctor.id},request_id=${request.id})}">Edit</a>-->
-<!--                        <a class="btn btn-danger"-->
-<!--                           th:href="@{/doctor/{doctor_id}/request/{request_id}/delete(doctor_id=${doctor.id},request_id=${request.id})}">Delete</a>-->
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a class="btn btn-info"
+                               th:href="@{/doctor/{doctor_id}/request/{request_id}(doctor_id=${doctor.id},request_id=${request.id})}">Edit</a>
+                            <a class="btn btn-danger"
+                               th:href="@{/doctor/{doctor_id}/request/{request_id}/delete(doctor_id=${doctor.id},request_id=${request.id})}">Delete</a>
+                        </div>
                         <div th:if="${request.status =='PENDING'}">
-                        <a class="btn btn-primary"
-                           th:href="@{/doctor/{doctor_id}/request/{request_id}/accept(doctor_id=${doctor.id},request_id=${request.id})}">Accept</a>
-                        <a class="btn btn-danger"
-                           th:href="@{/doctor/{doctor_id}/request/{request_id}/decline(doctor_id=${doctor.id},request_id=${request.id})}">Decline</a>
+                            <a class="btn btn-primary"
+                               th:href="@{/doctor/{doctor_id}/request/{request_id}/accept(doctor_id=${doctor.id},request_id=${request.id})}">Accept</a>
+                            <a class="btn btn-danger"
+                               th:href="@{/doctor/{doctor_id}/request/{request_id}/decline(doctor_id=${doctor.id},request_id=${request.id})}">Decline</a>
                         </div>
                         <div th:if="${request.status =='ACCEPTED'}">
-<!--                            <h6>-</h6>-->
                             <a class="btn btn-danger"
                                th:href="@{/doctor/{doctor_id}/request/{request_id}/decline(doctor_id=${doctor.id},request_id=${request.id})}">Decline</a>
                         </div>

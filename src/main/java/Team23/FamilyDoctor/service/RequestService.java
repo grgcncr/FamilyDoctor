@@ -11,18 +11,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-//import static Team23.FamilyDoctor.controller.CitizenController.getCitizens;
-//import static Team23.FamilyDoctor.controller.DoctorController.getDoctors;
-
 @Service
 public class RequestService {
-//    private List<Request> requests = new ArrayList<Request>();
-//    @PostConstruct
-//    public void setup() {
-//        Request x1= new Request("25/12/2023","ACCEPTED", getCitizens().get(1), getDoctors().get(1));
-//        requests.add(x1);
-//    }
-//
+
     @Autowired
     private RequestRepository requestRepository;
     @Autowired

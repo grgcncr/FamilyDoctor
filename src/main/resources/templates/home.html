@@ -3,19 +3,32 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head th:insert="~{fragments/header :: header}"></head>
+<style>
+        .main {
+                position: absolute;
+                top: 10%;
+                width: 100%;
+                text-align: center;
+                bottom: 90%;
+                font-family: "Georgia",serif;
+        }
+</style>
 
 <body>
 <!-- Include the header fragment -->
 <div th:insert="~{fragments/menu :: menu}"></div>
-<h1>WELCOME TO FAMILY DOCTOR WEBSITE. REGISTER YOUR DOCTORS TODAY</h1>
 <main>
-<!--        doesnt work-->
-        <img src="..\src\main\resources\templates\homeImage.jpg" alt="Home Image">
+        <div class="main" >
+                <h1>WELCOME TO FAMILY DOCTOR WEBSITE</h1>
+                <img width="820" height="547" src="/images/homeImage.jpg" alt="Home Image">
+                <h1>REGISTER YOUR DOCTOR TODAY</h1>
+        </div>
+
 </main>
-
-
 
 <!-- Include the footer fragment -->
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
+
+
 </html>

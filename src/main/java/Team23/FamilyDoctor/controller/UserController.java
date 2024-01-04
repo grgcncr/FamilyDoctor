@@ -7,6 +7,7 @@ import Team23.FamilyDoctor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -54,7 +55,7 @@ public class UserController {
     }
 
     @PostMapping("/user/{user_id}")
-    public String saveStudent(@PathVariable Long user_id, @ModelAttribute("user") User user, Model model) {
+    public String saveUser(@PathVariable Long user_id, @ModelAttribute("user") User user, Model model) {
         User the_user = (User) userService.getUser(user_id);
         the_user.setEmail(user.getEmail());
         the_user.setUsername(user.getUsername());
@@ -62,7 +63,7 @@ public class UserController {
         model.addAttribute("users", userService.getUsers());
         return "users";
     }
-    @Secured("ROLE_ADMIN")
+    @Secured("ADMIN")
     @GetMapping("/user/role/delete/{user_id}/{role_id}")
     public String deleteRolefromUser(@PathVariable Long user_id, @PathVariable Integer role_id, Model model){
         User user = (User) userService.getUser(user_id);
@@ -75,7 +76,7 @@ public class UserController {
         return "users";
 
     }
-    @Secured("ROLE_ADMIN")
+    @Secured("ADMIN")
     @GetMapping("/user/role/add/{user_id}/{role_id}")
     public String addRoletoUser(@PathVariable Long user_id, @PathVariable Integer role_id, Model model){
         User user = (User) userService.getUser(user_id);

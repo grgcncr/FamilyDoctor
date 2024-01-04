@@ -1,14 +1,24 @@
-<footer>
-    <div class="container">
+
+
+<footer xmlns:sec="http://www.w3.org/1999/xhtml">
+    <style>
+        .footer {
+            position: absolute;
+            top: 89%;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+    <div class="footer">
         <div sec:authorize="isAuthenticated()">
-            Authenticated username:
+            Authenticated email:
             <span sec:authentication="name"></span>
-            Authenticated user roles:
+            | Authenticated user roles:
             <span sec:authentication="principal.authorities"></span>
         </div>
         <hr/>
-        <p>&copy; 2023 My Awesome Website. All rights reserved.</p>
+        <p>&copy; 2024 Family Doctor. All rights reserved.</p>
     </div>
 </footer>
-</body>
+
 </html>

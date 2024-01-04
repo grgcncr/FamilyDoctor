@@ -1,11 +1,12 @@
-<doctors>
+
+<doctors xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <div th:if="${ not#lists.isEmpty(doctors)}">
         <table class="table">
             <thead>
             <tr>
                 <th>Name</th>
                 <th>Surname</th>
-                <th>PhoneNumber</th>
+                <th>Phone Number</th>
                 <th>ID</th>
                 <th>Actions</th>
             </tr>
@@ -18,9 +19,10 @@
                 <td th:text="${doctor.id}"></td>
                 <td th:if="${doctor.id}">
                     <a class="btn btn-info" th:href="@{/doctor/{id}/request (id=${doctor.id})}">Requests</a>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="btn btn-info" th:href="@{/doctor/{id}(id=${doctor.id})}">Edit</a>
                     <a class="btn btn-danger" th:href="@{/doctor/{id}/delete(id=${doctor.id})}">Delete</a>
-<!--                    <a th:href="@{/doctor/{doctor_id}/request/new(doctor_id=${doctor.id})}" class="btn btn-primary" role="button">Create new request</a>-->
+                    </div>
                 </td>
             </tr>
             </tbody>

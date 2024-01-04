@@ -5,6 +5,7 @@ import Team23.FamilyDoctor.dao.*;
 import Team23.FamilyDoctor.service.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class DoctorController {
         return "add_doctor";
     }
 
+    @Secured("ADMIN")
     @GetMapping("{doctor_id}")
     public String editDoctor(@PathVariable Integer doctor_id, Model model) {
         Doctor doctor = doctorDao.getDoctor(doctor_id);
@@ -45,16 +47,18 @@ public class DoctorController {
     @PostMapping("/new")
     public String saveDoctor(@ModelAttribute("doctor") Doctor doctor, Model model) {
         doctorDao.saveDoctor(doctor);
-        for(Request request : doctor.getRequests()){
-            requestService.saveCitizenRequest(request,doctor.getId());
+        for (Request request : doctor.getRequests()) {
+            requestService.saveCitizenRequest(request, doctor.getId());
         }
         model.addAttribute("doctors", doctorDao.getDoctors());
         return "doctors";
     }
+
+    @Secured("ADMIN")
     @GetMapping("{doctor_id}/delete")
     public String deleteDoctor(@PathVariable Integer doctor_id) {
         Doctor doctor = doctorDao.getDoctor(doctor_id);
-        for(Request request : doctor.getRequests()){
+        for (Request request : doctor.getRequests()) {
             requestService.deleteRequest(request.getId());
         }
         doctorDao.deleteDoctor(doctor_id);
@@ -84,32 +88,15 @@ public class DoctorController {
         return "requests";
     }
 
-    @GetMapping("{doctor_id}/request/{request_id}")
-    public String editDoctorRequest(@PathVariable int doctor_id, @PathVariable int request_id, Model model) {
-        Request request = requestService.getRequest(request_id);
-        model.addAttribute("request", request);
-        model.addAttribute("doctor_id", doctor_id);
-        return "add_doctor_request";
-    }
-
     @PostMapping("{doctor_id}/request/{request_id}")
     public String updateDoctorRequest(@PathVariable int doctor_id, @PathVariable int request_id) {
         System.out.println("doctor_id: (2 ids)" + doctor_id);
         Request request = requestService.getRequest(request_id);
-//        requestService.deleteRequest(request_id);
-//        requestService.saveDoctorRequest(request, doctor_id);
-        return "redirect:/doctor/{doctor_id}/request" ;
+        return "redirect:/doctor/{doctor_id}/request";
     }
 
-    @GetMapping("{doctor_id}/request/new")
-    public String addDoctorRequest(@PathVariable int doctor_id, Model model) {
-        Request request = new Request();
-        model.addAttribute("request", request);
-        model.addAttribute("doctor_id", doctor_id);
-        return "add_doctor_request";
-    }
-
-    //deletes mapping
+    //Deletes Mapping
+    @Secured("ADMIN")
     @GetMapping("{doctor_id}/request/{request_id}/delete")
     public String deleteDoctorRequest(@PathVariable int doctor_id, @PathVariable int request_id, Model model) {
         requestService.deleteRequest(request_id);
@@ -120,7 +107,6 @@ public class DoctorController {
     @GetMapping("{doctor_id}/request/{request_id}/accept")
     public String acceptRequest(@PathVariable int doctor_id, @PathVariable int request_id, Model model) {
         requestService.acceptRequest(request_id);
-//        requestService.getRequest(request_id).setStatus("ACCEPTED");
         return "redirect:/doctor/{doctor_id}/request";
     }
 
@@ -128,7 +114,6 @@ public class DoctorController {
     @GetMapping("{doctor_id}/request/{request_id}/decline")
     public String declineRequest(@PathVariable int doctor_id, @PathVariable int request_id, Model model) {
         requestService.declineRequest(request_id);
-//        requestService.getRequest(request_id).setStatus("DECLINED");
         return "redirect:/doctor/{doctor_id}/request";
     }
 

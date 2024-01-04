@@ -32,7 +32,6 @@ public class Citizen {
     }
 
     @OneToMany(mappedBy = "citizen", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//  @JoinColumn(name = "request_id")
     private List<Request> requests ;
 
     public List<Request> getRequests() {

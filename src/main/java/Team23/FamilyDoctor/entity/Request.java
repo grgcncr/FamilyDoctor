@@ -23,11 +23,6 @@ public class Request {
         this.status =  "PENDING";
     }
 
-//    public Request(String reqDate, String status, Citizen citizen, Doctor doctor) {
-//        this.reqDate = reqDate;
-//        this.status = status;
-//    }
-
     public Request(Citizen citizen, Doctor doctor) {
         this.reqDate = LocalDate.now().toString();
         this.status =  "PENDING";

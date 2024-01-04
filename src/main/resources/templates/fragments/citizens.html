@@ -1,14 +1,12 @@
-<!-- Include jQuery from a CDN -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8" crossorigin="anonymous"></script>
 
-<citizens>
+<citizens xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <div th:if="${ not#lists.isEmpty(citizens)}">
         <table class="table">
             <thead>
             <tr>
                 <th>Name</th>
                 <th>Surname</th>
-                <th>PhoneNumber</th>
+                <th>Phone Number</th>
                 <th>SSN</th>
                 <th>Actions</th>
             </tr>
@@ -22,9 +20,11 @@
                 <td th:if="${citizen.id}">
                     <a class="btn btn-info" th:href="@{/citizen/{id}/request (id=${citizen.id})}">Requests</a>
                     <a th:href="@{/citizen/{citizen_id}/request/new(citizen_id=${citizen.id})}" class="btn btn-primary" role="button">Create new request</a>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="btn btn-info" th:href="@{/citizen/{id}(id=${citizen.id})}">Edit</a>
                     <a class="btn btn-danger" th:href="@{/citizen/{id}/delete(id=${citizen.id})}">Delete</a>
-                     </td>
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -34,7 +34,5 @@
     </div>
     <a href="/citizen/new" class="btn btn-primary" role="button">Create new citizen</a>
 
-
-    </script>
 
 </citizens>
