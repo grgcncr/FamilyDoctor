@@ -35,7 +35,7 @@ public class CitizenController {
         return "add_citizen";
     }
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("{citizen_id}")
     public String editCitizen(@PathVariable Integer citizen_id, Model model) {
         Citizen citizen = citizenDao.getCitizen(citizen_id);
@@ -52,7 +52,7 @@ public class CitizenController {
         model.addAttribute("citizens", citizenDao.getCitizens());
         return "citizens";
     }
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("{citizen_id}/delete")
     public String deleteCitizen(@PathVariable Integer citizen_id) {
         Citizen citizen = citizenDao.getCitizen(citizen_id);
@@ -78,7 +78,7 @@ public class CitizenController {
         return "requests";
     }
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("{citizen_id}/request/{request_id}")
     public String editCitizenRequest(@PathVariable int citizen_id, @PathVariable int request_id, Model model) {
         Request request = requestService.getRequest(request_id);

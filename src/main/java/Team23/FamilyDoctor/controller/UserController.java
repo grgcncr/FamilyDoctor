@@ -63,7 +63,7 @@ public class UserController {
         model.addAttribute("users", userService.getUsers());
         return "users";
     }
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/user/role/delete/{user_id}/{role_id}")
     public String deleteRolefromUser(@PathVariable Long user_id, @PathVariable Integer role_id, Model model){
         User user = (User) userService.getUser(user_id);
@@ -76,7 +76,7 @@ public class UserController {
         return "users";
 
     }
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/user/role/add/{user_id}/{role_id}")
     public String addRoletoUser(@PathVariable Long user_id, @PathVariable Integer role_id, Model model){
         User user = (User) userService.getUser(user_id);

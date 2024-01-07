@@ -36,7 +36,7 @@ public class DoctorController {
         return "add_doctor";
     }
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("{doctor_id}")
     public String editDoctor(@PathVariable Integer doctor_id, Model model) {
         Doctor doctor = doctorDao.getDoctor(doctor_id);
@@ -54,7 +54,7 @@ public class DoctorController {
         return "doctors";
     }
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("{doctor_id}/delete")
     public String deleteDoctor(@PathVariable Integer doctor_id) {
         Doctor doctor = doctorDao.getDoctor(doctor_id);
@@ -96,7 +96,7 @@ public class DoctorController {
     }
 
     //Deletes Mapping
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("{doctor_id}/request/{request_id}/delete")
     public String deleteDoctorRequest(@PathVariable int doctor_id, @PathVariable int request_id, Model model) {
         requestService.deleteRequest(request_id);
