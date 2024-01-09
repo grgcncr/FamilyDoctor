@@ -2,6 +2,7 @@ package Team23.FamilyDoctor.controller;
 
 import Team23.FamilyDoctor.entity.*;
 import Team23.FamilyDoctor.dao.*;
+import Team23.FamilyDoctor.repository.DoctorRepository;
 import Team23.FamilyDoctor.service.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +14,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
-@RequestMapping("doctor")
+@RestController
+//@RequestMapping("doctor")
+@RequestMapping("/api")
 public class DoctorController {
 
-
+    @Autowired
+    private DoctorRepository doctorRepository;
     @Autowired
     RequestService requestService;
     @Autowired
     private DoctorDAO doctorDao;
+
+    @GetMapping("/doctors")
+    public List<Doctor> fetchDoctors(){
+        return doctorRepository.findAll();
+    }
 
     @GetMapping("")
     public String showDoctors(Model model) {
