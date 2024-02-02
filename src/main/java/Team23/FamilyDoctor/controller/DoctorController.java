@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-//@RequestMapping("doctor")
-@RequestMapping("/api")
+@Controller
+//@RestController
+@RequestMapping("doctor")
+//@RequestMapping("/api")
 public class DoctorController {
 
-    @Autowired
-    private DoctorRepository doctorRepository;
+
     @Autowired
     RequestService requestService;
     @Autowired
     private DoctorDAO doctorDao;
 
-    @GetMapping("/doctors")
+    /*@GetMapping("/doctors")
     public List<Doctor> fetchDoctors(){
         return doctorRepository.findAll();
-    }
+    }*/
 
     @GetMapping("")
     public String showDoctors(Model model) {

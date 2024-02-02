@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
+@Transactional
 public class DoctorDAOImpl implements DoctorDAO {
     @Autowired
     private EntityManager entityManager;
@@ -19,7 +20,7 @@ public class DoctorDAOImpl implements DoctorDAO {
     @Override
     @Transactional
     public List<Doctor> getDoctors() {
-        TypedQuery query = entityManager.createQuery("from Doctor", Doctor.class);
+        TypedQuery<Doctor> query = entityManager.createQuery("from Doctor", Doctor.class);
         return query.getResultList();
     }
 

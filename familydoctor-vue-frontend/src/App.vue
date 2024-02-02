@@ -1,26 +1,20 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
+<script setup>
+import { onBeforeMount } from 'vue';
+import { RouterView } from 'vue-router';
+import { useApplicationStore } from '@/stores/application.js';
+import AppHeader from '@/components/AppHeader.vue';
+import AppFooter from '@/components/AppFooter.vue';
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+const { loadUserData } = useApplicationStore();
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+onBeforeMount(() => {
+  // If this method is non-blocking, add a loader.
+  loadUserData();
+});
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<template>
+  <AppHeader />
+  <RouterView />
+  <AppFooter />
+</template>

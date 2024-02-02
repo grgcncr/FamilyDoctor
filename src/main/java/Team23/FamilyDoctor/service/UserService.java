@@ -6,6 +6,7 @@ import Team23.FamilyDoctor.repository.RoleRepository;
 import Team23.FamilyDoctor.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,6 +31,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthService authService; // Assuming you have an AuthService for generating JWT tokens
 
     @Transactional
     public Integer saveUser(User user) {
@@ -71,6 +75,9 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    public String generateJwtToken(Authentication authentication) {
+        return authService.generateJwtToken(authentication); //weird TODO
+    }
     @Transactional
     public Object getUsers() {
         return userRepository.findAll();
