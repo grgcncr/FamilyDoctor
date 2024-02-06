@@ -18,30 +18,30 @@ const router = createRouter({
             component: () => import('../views/CitizensView.vue'),
             meta: { requiresAuth: true }
         },
-        {
-            path: '/citizen/new',
-            name: 'citizen-new',
-            component: () => import('../views/CreateCitizenView.vue'),
-            meta: { requiresAuth: true }
-        },
+        // {
+        //     path: '/citizen/new',
+        //     name: 'citizen-new',
+        //     component: () => import('../views/CreateCitizenView.vue'),
+        //     meta: { requiresAuth: true }
+        // },
         {
             path: '/citizen/:id',
             name: 'citizen',
             component: () => import('../views/CitizenView.vue'),
             meta: { requiresAuth: true },
             children: [
-                {
-                    path: '',
-                    name: 'citizen-details',
-                    component: () => import('../views/CitizenDetailsView.vue'),
-                    meta: { requiresAuth: true }
-                },
-                {
-                    path: 'requests',
-                    name: 'citizen-requests',
-                    component: () => import('../views/CitizenRequestsView.vue'),
-                    meta: { requiresAuth: true }
-                }
+                // {
+                //     path: '',
+                //     name: 'citizen-details',
+                //     component: () => import('../views/CitizenDetailsView.vue'),
+                //     meta: { requiresAuth: true }
+                // },
+                // {
+                //     path: 'requests',
+                //     name: 'citizen-requests',
+                //     component: () => import('../views/CitizenRequestsView.vue'),
+                //     meta: { requiresAuth: true }
+                // }
             ]
         },
         {
@@ -50,52 +50,52 @@ const router = createRouter({
             component: () => import('../views/DoctorsView.vue'),
             meta: { requiresAuth: true }
         },
-        {
-            path: '/doctor/new',
-            name: 'doctor-new',
-            component: () => import('../views/CreateDoctorView.vue'),
-            meta: { requiresAuth: true }
-        },
+        // {
+        //     path: '/doctor/new',
+        //     name: 'doctor-new',
+        //     component: () => import('../views/CreateDoctorView.vue'),
+        //     meta: { requiresAuth: true }
+        // },
         {
             path: '/doctor/:id',
             name: 'doctor',
             component: () => import('../views/DoctorView.vue'),
             meta: { requiresAuth: true },
             children: [
-                {
-                    path: '',
-                    name: 'doctor-details',
-                    component: () => import('../views/DoctorDetailsView.vue'),
-                    meta: { requiresAuth: true }
-                },
-                {
-                    path: 'requests',
-                    name: 'doctor-requests',
-                    component: () => import('../views/DoctorRequestsView.vue'),
-                    meta: { requiresAuth: true }
-                }
+                // {
+                //     path: '',
+                //     name: 'doctor-details',
+                //     component: () => import('../views/DoctorDetailsView.vue'),
+                //     meta: { requiresAuth: true }
+                // },
+                // {
+                //     path: 'requests',
+                //     name: 'doctor-requests',
+                //     component: () => import('../views/DoctorRequestsView.vue'),
+                //     meta: { requiresAuth: true }
+                // }
             ]
         },
-        {
-            path: '/request/:id',
-            name: 'request',
-            component: () => import('../views/RequestView.vue'),
-            meta: { requiresAuth: true },
-            children: [
-                {
-                    path: '',
-                    name: 'request-details',
-                    component: () => import("../views/RequestDetailsView.vue"),
-                    meta: { requiresAuth: true },
-                },
-                {
-                    path: 'citizen',
-                    name: 'request-citizen',
-                    component: () => import("../views/RequestDoctorsView.vue"),
-                    meta: { requiresAuth: true },
-                }
-            ]
-        },
+        // {
+        //     path: '/request/:id',
+        //     name: 'request',
+        //     component: () => import('../views/RequestView.vue'),
+        //     meta: { requiresAuth: true },
+        //     children: [
+        //         {
+        //             path: '',
+        //             name: 'request-details',
+        //             component: () => import("../views/RequestDetailsView.vue"),
+        //             meta: { requiresAuth: true },
+        //         },
+        //         {
+        //             path: 'citizen',
+        //             name: 'request-citizen',
+        //             component: () => import("../views/RequestDoctorsView.vue"),
+        //             meta: { requiresAuth: true },
+        //         }
+        //     ]
+        // },
         {
             path: '/login',
             name: 'login',
@@ -104,7 +104,7 @@ const router = createRouter({
         {
             path: '/logout',
             name: 'logout',
-            component: () => import('../views/LogoutView.vue.vue'),
+            component: () => import('../views/LogoutView.vue'),
             meta: { requiresAuth: true }
         }
     ]

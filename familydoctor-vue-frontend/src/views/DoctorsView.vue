@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { useRemoteData } from '@/composables/useRemoteData.js';
+import { useRemoteData } from '@/services/useRemoteData.js';
 
 const urlRef = ref('http://localhost:9090/api/doctor');
 const authRef = ref(true);

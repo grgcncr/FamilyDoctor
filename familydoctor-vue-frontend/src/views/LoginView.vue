@@ -29,11 +29,13 @@ const onFormSubmit = () => {
       .then((response) => {
         if (response.ok) {
           response.json().then((data) => {
+            console.log(data);
             setUserData(data);
             persistUserData();
             router.push({ name: 'home' });
           });
         } else {
+          console.log(credentials.value);
           authenticationFailed.value = true;
         }
       })
@@ -73,7 +75,7 @@ onBeforeMount(() => {
             </div>
             <div class="mb-2">
               <label for="usernameFormControl" class="form-label mb-1"
-              >Email address or Username</label
+              >Username</label
               >
               <input
                   v-model="credentials.username"
