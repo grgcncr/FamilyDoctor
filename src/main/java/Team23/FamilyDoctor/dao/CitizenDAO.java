@@ -15,4 +15,7 @@ public interface CitizenDAO {
     public void deleteCitizen(Integer citizen_id);
 
     public List<Request> getCitizenRequests(Integer citizen_id);
+
+    public void cleanupDuplicateCitizens();
+
 }

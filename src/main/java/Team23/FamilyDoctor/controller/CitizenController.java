@@ -46,8 +46,10 @@ public class CitizenController {
     @PostMapping("/new")
     public String saveCitizen(@ModelAttribute("citizen") Citizen citizen, Model model) {
         citizenDao.saveCitizen(citizen);
-        for(Request request : citizen.getRequests()){
-            requestService.saveCitizenRequest(request,citizen.getId());
+        if (citizen.getRequests()!=null) {
+            for (Request request : citizen.getRequests()) {
+                requestService.saveCitizenRequest(request, citizen.getId());
+            }
         }
         model.addAttribute("citizens", citizenDao.getCitizens());
         return "citizens";

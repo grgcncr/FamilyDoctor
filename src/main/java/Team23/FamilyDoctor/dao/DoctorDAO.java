@@ -15,4 +15,7 @@ public interface DoctorDAO {
     public void deleteDoctor(Integer doctor_id);
 
     public List<Request> getDoctorRequests(Integer doctor_id);
+
+    public void cleanupDuplicateDoctors();
+
 }

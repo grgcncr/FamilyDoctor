@@ -9,7 +9,10 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Repository
 public class DoctorDAOImpl implements DoctorDAO {
     @Autowired
@@ -52,5 +55,27 @@ public class DoctorDAOImpl implements DoctorDAO {
     public List<Request> getDoctorRequests(Integer doctor_id) {
         Doctor doctor = entityManager.find(Doctor.class, doctor_id);
         return doctor.getRequests();
+    }
+
+    @Transactional
+    public void cleanupDuplicateDoctors() {
+        List<Doctor> allDoctors = getDoctors();
+        Map<String, Doctor> uniqueDoctors = new HashMap<>();
+
+        // Iterate through the list to identify duplicates based on your criteria
+        for (Doctor doctor : allDoctors) {
+            String key = generateKeyForDoctor(doctor); // Define a method to generate a unique key
+            if (!uniqueDoctors.containsKey(key)) {
+                uniqueDoctors.put(key, doctor);
+            } else {
+                // Delete duplicate doctor from database
+                deleteDoctor(doctor.getId());
+            }
+        }
+    }
+
+    // Define a method to generate a unique key based on your criteria (e.g., firstName, lastName, phoneNumber)
+    private String generateKeyForDoctor(Doctor doctor) {
+        return doctor.getFirstName() + "_" + doctor.getLastName() + "_" + doctor.getPhoneNumber();
     }
 }

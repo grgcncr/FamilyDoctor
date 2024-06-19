@@ -47,8 +47,10 @@ public class DoctorController {
     @PostMapping("/new")
     public String saveDoctor(@ModelAttribute("doctor") Doctor doctor, Model model) {
         doctorDao.saveDoctor(doctor);
-        for (Request request : doctor.getRequests()) {
-            requestService.saveCitizenRequest(request, doctor.getId());
+        if (doctor.getRequests()!=null) {
+            for (Request request : doctor.getRequests()) {
+                requestService.saveCitizenRequest(request, doctor.getId());
+            }
         }
         model.addAttribute("doctors", doctorDao.getDoctors());
         return "doctors";

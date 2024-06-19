@@ -44,8 +44,10 @@ public class RequestService {
         citizen.getRequests().add(request);
         Doctor doctor = doctorDAO.getDoctor(doctor_id);
         request.setDoctor(doctor);
-        doctor.getRequests().add(request);
-        requestRepository.save(request);
+        if(doctor!=null) {
+            doctor.getRequests().add(request);
+            requestRepository.save(request);
+        }
     }
 
 

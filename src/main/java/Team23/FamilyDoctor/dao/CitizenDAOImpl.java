@@ -9,12 +9,15 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Repository
 public class CitizenDAOImpl implements CitizenDAO {
     @Autowired
     private EntityManager entityManager;
-    
+
 
     @Override
     @Transactional
@@ -52,5 +55,27 @@ public class CitizenDAOImpl implements CitizenDAO {
     public List<Request> getCitizenRequests(Integer citizen_id) {
         Citizen citizen = entityManager.find(Citizen.class, citizen_id);
         return citizen.getRequests();
+    }
+
+    @Transactional
+    public void cleanupDuplicateCitizens() {
+        List<Citizen> allCitizens = getCitizens();
+        Map<String, Citizen> uniqueCitizens = new HashMap<>();
+
+        // Iterate through the list to identify duplicates based on your criteria
+        for (Citizen citizen : allCitizens) {
+            String key = generateKeyForCitizen(citizen); // Define a method to generate a unique key
+            if (!uniqueCitizens.containsKey(key)) {
+                uniqueCitizens.put(key, citizen);
+            } else {
+                // Delete duplicate citizen from database
+                deleteCitizen(citizen.getId());
+            }
+        }
+    }
+
+    // Define a method to generate a unique key based on your criteria (e.g., firstName, lastName, phoneNumber)
+    private String generateKeyForCitizen(Citizen citizen) {
+        return citizen.getFirstName() + "_" + citizen.getLastName() + "_" + citizen.getPhoneNumber();
     }
 }
