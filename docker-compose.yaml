@@ -8,18 +8,18 @@ services:
     environment:
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=pass123
-      - POSTGRES_DB=dsdb
+      - POSTGRES_DB=postgres
     healthcheck:
       test:
         - CMD-SHELL
-        - pg_isready -U postgres
+        - pg_isready -U dbuser -d postgres
       interval: 30s
       timeout: 30s
       retries: 3
     volumes:
       - 'dslabdb:/var/lib/postgresql/data/'
   spring:
-    image: sp
+    image: spring-test
     build:
       context: .
       dockerfile: nonroot.Dockerfile
@@ -29,7 +29,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/dsdb
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://4.211.130.185:5432/postgres
       - SPRING_DATASOURCE_USERNAME=dbuser
       - SPRING_DATASOURCE_PASSWORD=pass123
     #healthcheck:
