@@ -34,7 +34,7 @@ pipeline {
             steps {
                 sh '''
                     export ANSIBLE_CONFIG=/etc/ansible/ansible.cfg
-                    ansible-playbook -i ~/workspace/ansible-test/playbooks/hosts.yaml -l azure-db-server ~/workspace/ansible-test/playbooks/postgres.yaml
+                    ansible-playbook -i ~/workspace/ansible-test/hosts.yaml -l azure-db-server ~/workspace/ansible-test/playbooks/postgres.yaml
                 '''
             }
         }
