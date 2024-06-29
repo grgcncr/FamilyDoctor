@@ -18,6 +18,7 @@ services:
       retries: 3
     volumes:
       - 'dslabdb:/var/lib/postgresql/data/'
+
   spring:
     image: spring-test
     build:
@@ -25,9 +26,6 @@ services:
       dockerfile: nonroot.Dockerfile
     ports:
       - "8080:9090"
-    depends_on:
-      db:
-        condition: service_healthy
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://4.211.130.185:5432/postgres
       - SPRING_DATASOURCE_USERNAME=dbuser
