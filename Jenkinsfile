@@ -36,28 +36,28 @@ pipeline {
             steps {
                 sh '''
                    # replace dbserver in host_vars
-                     sed -i 's/dbserver/4.211.130.185/g' ~/workspace/ansible-test/host_vars/appserver-vm.yaml
+                     sed -i 's/dbserver/4.211.130.185/g' ~/workspace/ansible-test/host_vars/gcloud-app-server.yaml
                    # replace workingdir in host_vars
-                     sed -i 's/vagrant/azureuser/g' ~/workspace/ansible-test/host_vars/appserver-vm.yaml
+                     sed -i 's/vagrant/azureuser/g' ~/workspace/ansible-test/host_vars/gcloud-app-server.yaml
                 '''
                 sh '''
                     # edit host var for appserver
 
                     export ANSIBLE_CONFIG=~/workspace/ansible-test/ansible.cfg
-                    ansible-playbook -i ~/workspace/ansible-test/hosts.yaml -l appserver-vm ~/workspace/ansible-test/playbooks/spring.yaml
+                    ansible-playbook -i ~/workspace/ansible-test/hosts.yaml -l gcloud-app-server ~/workspace/ansible-test/playbooks/spring.yaml
                 '''
             }
         }
 
-       stage('Deploy frontend') {
-            steps {
-                sh '''
-                    sed -i 's/dbserver/4.211.130.185/g' ~/DevOps/family-doctor-ansible/host_vars/appserver-vm.yaml
-                    export ANSIBLE_CONFIG=~/workspace/ansible-test/ansible.cfg
-                    ansible-playbook -i ~/workspace/ansible/hosts.yaml -l appserver-vm -e branch=main -e backend_server_url=http://localhost:9090 ~//DevOps/family-doctor-ansible/playbooks/vuejs.yaml
-                '''
-            }
-       }
+       // stage('Deploy frontend') {
+       //      steps {
+       //          sh '''
+       //              sed -i 's/dbserver/4.211.130.185/g' ~/workspace/ansible-test/host_vars/gcloud-app-server.yaml
+       //              export ANSIBLE_CONFIG=~/workspace/ansible-test/ansible.cfg
+       //              ansible-playbook -i ~/workspace/ansible-test/hosts.yaml -l gcloud-app-server -e branch=main -e backend_server_url=http://localhost:9090 ~/workspace/ansible-test/playbooks/vuejs.yaml
+       //          '''
+       //      }
+       // }
        
     }
 
