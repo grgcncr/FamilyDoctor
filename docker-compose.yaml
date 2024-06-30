@@ -12,7 +12,7 @@ services:
     healthcheck:
       test:
         - CMD-SHELL
-        - pg_isready -U dbuser -d postgres
+        - pg_isready -U postgres -d postgres
       interval: 30s
       timeout: 30s
       retries: 3
@@ -25,7 +25,10 @@ services:
       context: .
       dockerfile: nonroot.Dockerfile
     ports:
-      - "8080:9090"
+      - "9090:9090"
+    depends_on:
+    db:
+      condition: service_healthy
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://4.211.130.185:5432/postgres
       - SPRING_DATASOURCE_USERNAME=dbuser
