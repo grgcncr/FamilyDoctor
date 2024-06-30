@@ -5,7 +5,8 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '30'))
     }
     environment {
-         DOCKER_TOKEN = credentials('git-key')
+        EMAIL_TO = "thanoszapp@gmail.com"
+        DOCKER_TOKEN = credentials('git-token')
         DOCKER_USER = 'ThanosZappas'
         DOCKER_SERVER = 'ghcr.io'
         DOCKER_PREFIX = 'ghcr.io/thanoszappas/ds-spring'
@@ -15,24 +16,15 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'version1', url: 'git@github.com:grgcncr/FamilyDoctor.git'
-            }   
+            }
         }
         
-        stage('Install docker') {
-                steps {
-                    sh '''
-                        export ANSIBLE_CONFIG=~/workspace/ansible-singlevm-docker/ansible.cfg
-                        ansible-playbook -i ~/workspace/ansible-singlevm-docker/hosts.yaml -l azure-db-server ~/workspace/ansible-singlevm-docker/playbooks/docker.yaml
-                    '''
-                }
-        }
-
         stage('Docker build and push') {
             steps {
                 sh '''
                     HEAD_COMMIT=$(git rev-parse --short HEAD)
                     TAG=$HEAD_COMMIT-$BUILD_ID
-                    docker build --rm -t $DOCKER_PREFIX:$TAG -t $DOCKER_PREFIX:latest -f nonroot.Dockerfile .
+                    docker build --rm -t $DOCKER_PREFIX:$TAG -t $DOCKER_PREFIX:latest  -f nonroot.Dockerfile .
                     echo $DOCKER_TOKEN | docker login $DOCKER_SERVER -u $DOCKER_USER --password-stdin
                     docker push $DOCKER_PREFIX --all-tags
                 '''
@@ -53,4 +45,9 @@ pipeline {
          }
     }
 
+    post {
+        always {
+            mail  to: "thanoszapp@gmail.com", body: "Project ${env.JOB_NAME} <br>, Build status ${currentBuild.currentResult} <br> Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}", subject: "JENKINS: Project name -> ${env.JOB_NAME}, Build -> ${currentBuild.currentResult}"
+        }
+    }
 }
