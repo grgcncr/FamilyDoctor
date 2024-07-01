@@ -5,9 +5,8 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '30'))
     }
     environment {
-        EMAIL_TO = "thanoszapp@gmail.com"
-        DOCKER_TOKEN = credentials('git-token')
-        DOCKER_USER = 'ThanosZappas'
+        DOCKER_TOKEN = credentials('git-key')
+        DOCKER_USER = 'thanoszappas'
         DOCKER_SERVER = 'ghcr.io'
         DOCKER_PREFIX = 'ghcr.io/thanoszappas/ds-spring'
     }
@@ -38,16 +37,11 @@ pipeline {
         stage('Install project with docker compose') {
                     steps {
                         sh '''
-                            export ANSIBLE_CONFIG=~/workspace/ansible-singlevm-docker/ansible.cfg
-                            ansible-playbook -i ~/workspace/ansible-singlevm-docker/hosts.yaml -l azure-db-server ~/workspace/ansible-singlevm-docker/playbooks/docker-compose-test.yaml
+                            export ANSIBLE_CONFIG=~/workspace/ansible-test/ansible.cfg
+                            ansible-playbook -i ~/workspace/ansible-test/hosts.yaml -l azure-db-server ~/workspace/ansible-test/playbooks/docker-compose-test.yaml
                         '''
                     }
          }
     }
 
-    post {
-        always {
-            mail  to: "thanoszapp@gmail.com", body: "Project ${env.JOB_NAME} <br>, Build status ${currentBuild.currentResult} <br> Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}", subject: "JENKINS: Project name -> ${env.JOB_NAME}, Build -> ${currentBuild.currentResult}"
-        }
-    }
 }
