@@ -16,14 +16,6 @@ pipeline {
             }
         }
 
-        stage('install ansible prerequisites') {
-            steps {
-                sh '''
-                    ansible-galaxy install geerlingguy.postgresql
-                '''
-            }
-        }
-
         stage('Install postgres') {
             steps {
                 sh '''
@@ -50,16 +42,6 @@ pipeline {
             }
         }
 
-       // stage('Deploy frontend') {
-       //      steps {
-       //          sh '''
-       //              sed -i 's/dbserver/4.211.130.185/g' ~/workspace/ansible-docker/host_vars/gcloud-app-server.yaml
-       //              export ANSIBLE_CONFIG=~/workspace/ansible-docker/ansible.cfg
-       //              ansible-playbook -i ~/workspace/ansible-docker/hosts.yaml -l gcloud-app-server -e branch=main -e backend_server_url=http://localhost:9090 ~/workspace/ansible-docker/playbooks/vuejs.yaml
-       //          '''
-       //      }
-       // }
-       
     }
 
 }

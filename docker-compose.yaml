@@ -33,26 +33,6 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://4.211.130.185:5432/postgres
       - SPRING_DATASOURCE_USERNAME=dbuser
       - SPRING_DATASOURCE_PASSWORD=pass123
-    #healthcheck:
-     # test: ["CMD", "curl", "-f", "http://localhost:9090/actuator/health"]
-      #interval: 30s
-      #timeout: 30s
-      #retries: 3
-
- # frontend:
-    #image: front
-   # build:
-     # context: https://github.com/gkoulis/ds-lab-2023-frontend.git#env
-      #context: git@github.com:gkoulis/ds-lab-2023-frontend.git#env
-      #dockerfile: Dockerfile
-    #environment:
-      #- VITE_BACKEND=http://spring:9090
-    #ports:
-    #  - 9000:80
-   # depends_on:
-  #    spring:
- #       condition: service_healthy
-#
 
 volumes:
     dslabdb:
